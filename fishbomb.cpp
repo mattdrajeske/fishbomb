@@ -100,6 +100,7 @@ void allocateFish(int rows, int columns) {
 
    //iterate through dynamic array
    for (int i = 0; i < sizeof(fishArray); i++) {
+      
       //determine where start position y is
       if (y - 2 >= 0) {
          startY = y - 2;
@@ -127,17 +128,6 @@ void allocateFish(int rows, int columns) {
       }
    }
 
-   /*for (int i = 0; i < sizeof(fishArray); i++) {
-      for (int j = 0; j < sizeof(fishArray[i]); j++) {
-
-         //determine which tiles have been bombed
-         if ((i >= startX && i <= endX) && (j >= startY && j <= endY)){
-            fishCaught += fishArray[i][j];
-            fishArray[i][j] = 0;
-         }
-      }
-   }  */
-  
   //test 2, array after it is bombed
    for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
