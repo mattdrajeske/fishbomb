@@ -86,42 +86,37 @@ void allocateFish(int rows, int columns) {
       startX = 0;
    }
 
-   if (x + 2 < sizeof(fishArray)) {
+   if (x + 2 <= rows - 1) {
       endX = x + 2;
    }
    else {
-      endX = sizeof(fishArray - 1);
+      endX = rows - 1;
    }
-   /*startX = x - 2;
-   endX = x + 2;
 
-   startY = y - 2;
-   endY = y + 2;*/
+   //determine where start position y is
+   if (y - 2 >= 0) {
+      startY = y - 2;
+   }
+   else {
+      startY = 0; //should work
+   }
+
+   //end position y
+   if (y + 2 <= columns - 1) {
+      endY = y + 2;
+   }
+   else {
+      endY = columns - 1; //should work
+   }
 
    //iterate through dynamic array
-   for (int i = 0; i < sizeof(fishArray); i++) {
+   for (int i = 0; i < rows; i++) {
       
-      //determine where start position y is
-      if (y - 2 >= 0) {
-         startY = y - 2;
-      }
-      else {
-         startY = 0; //should work
-      }
-
-
-      //end position y
-      if (y + 2 < sizeof(fishArray[i])) {
-         endY = y + 2;
-      }
-      else {
-         endY = sizeof(fishArray[i]); //should work
-      }
-
-      for (int j = 0; j < sizeof(fishArray[i]); j++) {
+     
+      for (int j = 0; j < columns; j++) {
 
          //determine which tiles have been bombed
-         if ((i <= startX && i >= endX) && (j >= startY && j <= endY)) {
+         if (i >= startX && i <= endX && j >= startY && j <= endY) {
             fishCaught += fishArray[i][j];
             fishArray[i][j] = 0;
          }
@@ -138,72 +133,6 @@ void allocateFish(int rows, int columns) {
    }
 };
 
-/*void bombFish(int* fishArray[], int x, int y) {
-
-   //Bombing a fish means setting its (x, y) coordinate in the grid to 0 and add its value to total fish caught
-   //integers to mark where in the array the fish were bombed. (startX, startY) is top left corner of blast,
-   //(endX, endY) is bottom right corner.
-   int startX, startY;
-   int endX, endY;
-
-   //declare a variable for counting fish caught and initialize to 0
-   int fishCaught = 0;
-
-   //determine where the x value is to start bombing fish
-   //Must account for when the explosion goes off the grid
-   if (x - 2 >= 0) {
-      startX = x - 2;
-   }
-   else {
-      startX = 0;
-   }
-
-   //ending position x
-   if (x + 2 < sizeof(fishArray)) {
-      endX = x + 2;
-   }
-   else {
-      endX = sizeof(fishArray) - 1;
-   }
-
-   //iterate through dynamic array
-   for (int i = 0; i < sizeof(fishArray); i++) {
-      for (int j = 0; j < sizeof(fishArray[i]); j++) {
-         //determine where start position y is
-         if (y - 2 >= 0) {
-            startY = y - 2;
-         }
-         else {
-            startY = 0; //should work
-         }
-
-         //end position y
-         if (y + 2 < sizeof(fishArray[i])) {
-            endY = y + 2;
-         }
-         else {
-            endY = sizeof(fishArray[i]) - 1; //should work
-         }
-
-         //determine which tiles have been bombed
-         if ((i <= startY && i >= endY) && (j >= startX && j <= endX)) {
-            fishCaught += fishArray[i][j];
-            fishArray[i][j] = 0;
-         }
-      }
-   }
-
-   for (int i = 0; i < sizeof(fishArray); i++) {
-      for (int j = 0; j < sizeof(fishArray[i]); j++) {
-         
-         //determine which tiles have been bombed
-         if ((i >= startX && i <= endX) && (j >= startY && j <= endY)) {
-            fishCaught += fishArray[i][j];
-            fishArray[i][j] = 0;
-         }
-      }
-   }
-/*};*/
 
 
 
