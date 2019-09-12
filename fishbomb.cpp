@@ -12,7 +12,7 @@ using namespace std;
 
 void getDimensions(int&, int&);
 void allocateFish(int, int);
-void bombFish(int*[], int, int);
+void bombFish(int*[], int, int, int, int);
 
 int main() {
 
@@ -62,15 +62,23 @@ void allocateFish(int rows, int columns) {
    }
 
    //3 sticks of dynamite are thrown. These will be the coordinates they are thrown to.
-   int x, y;
-  // int x2, y2;
-  // int x3, y3;
+   int x1, y1;
+   int x2, y2;
+   int x3, y3;
 
-   cin >> x >> y; 
+   cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3; 
+
+   //function call
+   bombFish(fishArray, x1, y1, rows, columns);
+   bombFish(fishArray, x2, y2, rows, columns);
+   bombFish(fishArray, x3, y3, rows, columns);
+};
+
+void bombFish(int* fishArray[], int x, int y, int rows, int columns) {
 
    //Bombing a fish means setting its (x, y) coordinate in the grid to 0 and add its value to total fish caught
-   //integers to mark where in the array the fish were bombed. (startX, startY) is top left corner of blast,
-   //(endX, endY) is bottom right corner.
+    //integers to mark where in the array the fish were bombed. (startX, startY) is top left corner of blast,
+    //(endX, endY) is bottom right corner.
    int startX, startY;
    int endX, endY;
 
@@ -111,8 +119,8 @@ void allocateFish(int rows, int columns) {
 
    //iterate through dynamic array
    for (int i = 0; i < rows; i++) {
-      
-     
+
+
       for (int j = 0; j < columns; j++) {
 
          //determine which tiles have been bombed
@@ -123,7 +131,7 @@ void allocateFish(int rows, int columns) {
       }
    }
 
-  //test 2, array after it is bombed
+   //test 2, array after it is bombed
    for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
          cout << fishArray[i][j]; //works without a space but a space breaks it for some reason (?)
@@ -131,8 +139,8 @@ void allocateFish(int rows, int columns) {
       }
       cout << endl;
    }
+   cout << endl;
 };
-
 
 
 
