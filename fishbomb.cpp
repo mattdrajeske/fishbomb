@@ -79,54 +79,64 @@ void allocateFish(int rows, int columns) {
 
    //determine where the x value is to start bombing fish
    //Must account for when the explosion goes off the grid
-   /*if (x - 2 >= 0) {
+   if (x - 2 >= 0) {
       startX = x - 2;
    }
    else {
       startX = 0;
-   }*/
-   startX = x - 2;
+   }
+
+   if (x + 2 < sizeof(fishArray)) {
+      endX = x + 2;
+   }
+   else {
+      endX = sizeof(fishArray - 1);
+   }
+   /*startX = x - 2;
    endX = x + 2;
+
+   startY = y - 2;
+   endY = y + 2;*/
 
    //iterate through dynamic array
    for (int i = 0; i < sizeof(fishArray); i++) {
-      for (int j = 0; j < sizeof(fishArray[i]); j++) {
-         //determine where start position y is
-         /*if (y - 2 >= 0) {
-            startY = y - 2;
-         }
-         else {
-            startY = 0; //should work
-         }*/
+      //determine where start position y is
+      if (y - 2 >= 0) {
          startY = y - 2;
+      }
+      else {
+         startY = 0; //should work
+      }
+
+
+      //end position y
+      if (y + 2 < sizeof(fishArray[i])) {
          endY = y + 2;
-         
-         //end position y
-         if (y + 2 < sizeof(fishArray[i])) {
-            endY = y + 2;
-         }
-         else {
-            endY = sizeof(fishArray[i]); //should work
-         }
+      }
+      else {
+         endY = sizeof(fishArray[i]); //should work
+      }
+
+      for (int j = 0; j < sizeof(fishArray[i]); j++) {
 
          //determine which tiles have been bombed
-         if ((i <= startY && i >= endY) && (j >= startX && j <= endX)) {
+         if ((i <= startX && i >= endX) && (j >= startY && j <= endY)) {
             fishCaught += fishArray[i][j];
             fishArray[i][j] = 0;
          }
       }
    }
 
-   for (int i = 0; i < sizeof(fishArray); i++) {
+   /*for (int i = 0; i < sizeof(fishArray); i++) {
       for (int j = 0; j < sizeof(fishArray[i]); j++) {
 
          //determine which tiles have been bombed
-         if (i >= startX && j >= startY && i <= endX + 1 && j <= endY + 1){
+         if ((i >= startX && i <= endX) && (j >= startY && j <= endY)){
             fishCaught += fishArray[i][j];
             fishArray[i][j] = 0;
          }
       }
-   }  
+   }  */
   
   //test 2, array after it is bombed
    for (int i = 0; i < rows; i++) {
