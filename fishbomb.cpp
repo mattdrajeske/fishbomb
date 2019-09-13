@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 //#include "pch.h"
+
 using namespace std;
 
 void getDimensions(int&, int&);
@@ -53,15 +54,6 @@ void allocateFish(int& trialNum, int rows, int columns) {
       }
    }
 
-   /*//test 1, default array with no changes
-   for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < columns; j++) {
-         cout << fishArray[i][j]; //works without a space but a space breaks it for some reason (?)
-                                  //seems to be an issue with the test idk it's weird
-      }
-      cout << endl;
-   }*/
-
    //3 sticks of dynamite are thrown. These will be the coordinates they are thrown to.
    int x1, y1;
    int x2, y2;
@@ -69,14 +61,15 @@ void allocateFish(int& trialNum, int rows, int columns) {
 
    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
 
-   //counter for having correct output format
-
-
    //function call
    cout << "#" << trialNum << ": Bender catches " <<
       bombFish(fishArray, x1, y1, rows, columns) + bombFish(fishArray, x2, y2, rows, columns) + bombFish(fishArray, x3, y3, rows, columns)
       << " fish" << endl;
 
+   for (int j = 0; j < rows; j++) {
+      delete[] fishArray[j];
+   }
+   delete[] fishArray;
 };
 
 int bombFish(int* fishArray[], int x, int y, int rows, int columns) {
@@ -136,14 +129,5 @@ int bombFish(int* fishArray[], int x, int y, int rows, int columns) {
       }
    }
 
-   /*//test 2, array after it is bombed
-   for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < columns; j++) {
-         cout << fishArray[i][j]; //works without a space but a space breaks it for some reason (?)
-                                  //seems to be an issue with the test idk it's weird
-      }
-      cout << endl;
-   }
-   cout << endl;*/
    return fishCaught;
 };
