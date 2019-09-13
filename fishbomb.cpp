@@ -40,6 +40,8 @@ void getDimensions(int& r, int& c) {
 void allocateFish(int& trialNum, int& rows, int& columns) {
 
    //columns in 2D array of fish
+   //using malloc instead of new because otherwise i got a bunch of heap corruption errors
+   //this worked though`
    int** fishArray = (int**)malloc(rows * sizeof(int*));
    for (int i = 0; i < rows; i++) {
       fishArray[i] = (int*)malloc(columns * sizeof(int));
