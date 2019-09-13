@@ -1,7 +1,9 @@
+
+
 ///////////////////////////////////////////////////////////////
 //Matt Drajeske
 //CS 1575 Data Structures
-//Assignment 1
+//Assignment 1: Fish Bomb
 ///////////////////////////////////////////////////////////////
 
 #include <stdio.h>
@@ -37,6 +39,14 @@ void getDimensions(int& r, int& c) {
    cin >> r >> c;
 };
 
+
+//////////////////////////////////////////////////////////////////////////////////////
+/// @fn allocateFish
+/// @brief allocate a 2D array dynamically and deallocate it after it is bombed
+/// @param trialNum used to format output correctly, value should be trial number - 1
+/// @param rows height of 2D array
+/// @param columns width of 2D array
+//////////////////////////////////////////////////////////////////////////////////////
 void allocateFish(int& trialNum, int& rows, int& columns) {
 
    //columns in 2D array of fish
@@ -46,7 +56,7 @@ void allocateFish(int& trialNum, int& rows, int& columns) {
    for (int i = 0; i < rows; i++) {
       fishArray[i] = (int*)malloc(columns * sizeof(int));
    }
-   
+
    /*//dynamic allocation of array
    for (int i = 0; i < columns; i++) {
       fishArray[i] = new int[columns];
@@ -71,7 +81,7 @@ void allocateFish(int& trialNum, int& rows, int& columns) {
       bombFish(fishArray, x1, y1, rows, columns) + bombFish(fishArray, x2, y2, rows, columns) + bombFish(fishArray, x3, y3, rows, columns)
       << " fish" << endl;
 
-   for (int i = 0; i <rows; i++) {
+   for (int i = 0; i < rows; i++) {
       free(fishArray[i]);
    }
    free(fishArray);
@@ -79,6 +89,16 @@ void allocateFish(int& trialNum, int& rows, int& columns) {
 
 };
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// @fn bombFish
+/// @brief set a 5x5 area in the array to 0 and increment a value to determine the number of fish caught
+/// @param fishArray dynamic 2D array that represents sonar grid for fish
+/// @param x x coordinate
+/// @param y y coordinate
+/// @param rows height of 2D array
+/// @param columns width of 2D array
+/// @return returns the number of fish that were caught using bombs
+////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 int bombFish(int* fishArray[], int x, int y, int rows, int columns) {
 
    //Bombing a fish means setting its (x, y) coordinate in the grid to 0 and add its value to total fish caught
