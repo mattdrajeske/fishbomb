@@ -46,7 +46,6 @@ void allocateFish(int& trialNum, int& rows, int& columns) {
    for (int i = 0; i < rows; i++) {
       fishArray[i] = (int*)malloc(columns * sizeof(int));
    }
-
    
    /*//dynamic allocation of array
    for (int i = 0; i < columns; i++) {
