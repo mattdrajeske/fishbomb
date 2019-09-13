@@ -66,8 +66,11 @@ void allocateFish(int& trialNum, int rows, int columns) {
       bombFish(fishArray, x1, y1, rows, columns) + bombFish(fishArray, x2, y2, rows, columns) + bombFish(fishArray, x3, y3, rows, columns)
       << " fish" << endl;
 
-   free(fishArray);
-   fishArray = NULL;
+   for (int i = 0; i < rows; i++) {
+      delete[] fishArray[i];
+   }
+   delete[] fishArray;
+   
 };
 
 int bombFish(int* fishArray[], int x, int y, int rows, int columns) {
