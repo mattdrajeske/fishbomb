@@ -12,7 +12,7 @@
 using namespace std;
 
 void getDimensions(int&, int&);
-void allocateFish(int&, int, int);
+void allocateFish(int&, int&, int&);
 int bombFish(int*[], int, int, int, int);
 
 int main() {
@@ -37,15 +37,19 @@ void getDimensions(int& r, int& c) {
    cin >> r >> c;
 };
 
-void allocateFish(int& trialNum, int rows, int columns) {
+void allocateFish(int& trialNum, int& rows, int& columns) {
 
    //columns in 2D array of fish
-   int** fishArray = new int*[rows];
+   int** fishArray = (int**)malloc(rows * sizeof(int*));
+   for (int i = 0; i < rows; i++) {
+      fishArray[i] = (int*)malloc(columns * sizeof(int));
+   }
 
-   //dynamic allocation of array
+   
+   /*//dynamic allocation of array
    for (int i = 0; i < columns; i++) {
       fishArray[i] = new int[columns];
-   }
+   }*/
 
    //fill array
    for (int i = 0; i < rows; i++) {
@@ -66,18 +70,19 @@ void allocateFish(int& trialNum, int rows, int columns) {
       bombFish(fishArray, x1, y1, rows, columns) + bombFish(fishArray, x2, y2, rows, columns) + bombFish(fishArray, x3, y3, rows, columns)
       << " fish" << endl;
 
-   for (int i = 0; i < rows; i++) {
-      delete[] fishArray[i];
+   for (int i = 0; i <rows; i++) {
+      free(fishArray[i]);
    }
-   delete[] fishArray;
-   
+   free(fishArray);
+   fishArray = NULL;
+
 };
 
 int bombFish(int* fishArray[], int x, int y, int rows, int columns) {
 
    //Bombing a fish means setting its (x, y) coordinate in the grid to 0 and add its value to total fish caught
-    //integers to mark where in the array the fish were bombed. (startX, startY) is top left corner of blast,
-    //(endX, endY) is bottom right corner.
+   //integers to mark where in the array the fish were bombed. (startX, startY) is top left corner of blast,
+   //(endX, endY) is bottom right corner.
    int startX, startY;
    int endX, endY;
 
